@@ -11,14 +11,15 @@ namespace RobotsVsDinosaurs
         public string robotName;
         public int roboHealth;
         public int powerLevel;
-        public int attackPower;
+        public int roboAttackPower;
         public List<Weapon> equippedWeapon;
 
-        public Robot(string robotName, int roboHealth, int powerLevel)
+        public Robot(string robotName, int roboHealth, int powerLevel, int roboAttackPower)
         {
             this.robotName = robotName;
             this.roboHealth = roboHealth;
             this.powerLevel = powerLevel;
+            this.roboAttackPower = roboAttackPower;
             ChooseWeapon();
             
             
@@ -26,7 +27,7 @@ namespace RobotsVsDinosaurs
 
         public void ChooseWeapon()
         {
-            Console.WriteLine("Choose your robot's weapon. 1. Lazer Rifle 2. Lazer Sword, 3. Robofists");
+            Console.WriteLine("Choose your robot's starting weapon. 1. Lazer Rifle 2. Lazer Sword, 3. Robofists");
             int selectedWeapon = int.Parse(Console.ReadLine());
             if (selectedWeapon == 1)
             {
@@ -48,9 +49,9 @@ namespace RobotsVsDinosaurs
                 ChooseWeapon();
             }
         }
-        public void AttackDinosaur()
+        public void AttackDinosaur(Dinosaur chosenDino)
         {
-
+            chosenDino.dinoHealth -= roboAttackPower;
         } 
     }
 
