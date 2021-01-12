@@ -12,6 +12,8 @@ namespace RobotsVsDinosaurs
         public int dinoHealth;
         public int dinoEnergy;
         public int dinoAttackPower;
+        string[] attackArray = new string[3];
+                
 
         public Dinosaur(string dinoType, int dinoHealth, int dinoEnergy, int attackPower)
         {
@@ -19,6 +21,9 @@ namespace RobotsVsDinosaurs
             this.dinoHealth = dinoHealth;
             this.dinoEnergy = dinoEnergy;
             this.dinoAttackPower = attackPower;
+            attackArray[0] = "Base Attack = 1";
+            attackArray[1] = "Bite = 2";
+            attackArray[2] = "Charge = 3";
         }
 
         public void HeadbuttRobot(Robot chosenRobot)
@@ -32,7 +37,7 @@ namespace RobotsVsDinosaurs
             else
             {
                 Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
-                dinoEnergy = 100;
+                dinoEnergy = 50;
             }
             
 
@@ -50,7 +55,7 @@ namespace RobotsVsDinosaurs
             else
             {
                 Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
-                dinoEnergy = 100;
+                dinoEnergy = 50;
             }
 
 
@@ -67,7 +72,7 @@ namespace RobotsVsDinosaurs
             else
             {
                 Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
-                dinoEnergy = 100;
+                dinoEnergy = 50;
             }
 
 
@@ -75,17 +80,11 @@ namespace RobotsVsDinosaurs
         public void ChooseAttack(Robot chosenRobot)
         {
             Console.WriteLine("Choose your attack:");
-
-            string[] attackArray = new string[3];
-            attackArray[0] = "Base Attack = 1";
-            attackArray[1] = "Bite = 2";
-            attackArray[2] = "Charge = 3";
             foreach (string attack in attackArray)
             {
                 Console.WriteLine(attack);
             }
             int chosenAttack = int.Parse(Console.ReadLine());
-
             if (chosenAttack == 1)
             {
                 HeadbuttRobot(chosenRobot);

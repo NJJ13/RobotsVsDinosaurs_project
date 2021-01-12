@@ -14,15 +14,22 @@ namespace RobotsVsDinosaurs
         public int attackPower = 5;
         public Weapon equippedWeapon;
         int roboAttackPower;
+        public Weapon lazerRifle = new Weapon("Lazer Rifle", 15);
+        public Weapon lazerSword = new Weapon("Lazer Sword", 10);
+        public Weapon robofists = new Weapon("Robofists", 5);
+
         public Robot(string robotName, int roboHealth, int powerLevel)
         {
             this.robotName = robotName;
             this.roboHealth = roboHealth;
             this.powerLevel = powerLevel;
-            Weapon none = new Weapon("None", 1);
-            equippedWeapon = none;
+            equippedWeapon = new Weapon("None", 1);
             this.roboAttackPower = equippedWeapon.attackPower * attackPower;
-                        
+            List<Weapon> roboWeapons = new List<Weapon>();
+            roboWeapons.Add(lazerRifle);
+            roboWeapons.Add(lazerSword);
+            roboWeapons.Add(robofists);
+                                    
         }
 
         
@@ -38,7 +45,7 @@ namespace RobotsVsDinosaurs
                 int selectedWeapon = int.Parse(Console.ReadLine());
                 if (selectedWeapon == 1)
                 {
-                    Weapon lazerRifle = new Weapon("Lazer Rifle", 15);
+                    
                     Console.WriteLine("Lazer Rifle has been selected.");
                     equippedWeapon = lazerRifle;
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
@@ -47,7 +54,6 @@ namespace RobotsVsDinosaurs
                 }
                 else if (selectedWeapon == 2)
                 {
-                    Weapon lazerSword = new Weapon("Lazer Sword", 10);
                     Console.WriteLine("Lazer Sword has been selected.");
                     equippedWeapon = lazerSword;
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
@@ -56,18 +62,15 @@ namespace RobotsVsDinosaurs
                 }
                 else if (selectedWeapon == 3)
                 {
-                    Weapon roboFists = new Weapon("Robofists", 5);
                     Console.WriteLine("Robofists have been selected.");
-                    equippedWeapon = roboFists;
+                    equippedWeapon = robofists;
                     roboHealth += 50;
                     powerLevel -= 10;
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
                 }
                 else
                 {
-                    Weapon none = new Weapon("No weapon selected", 1);
-                    Console.WriteLine("No weapon has been equipped.");
-                    equippedWeapon = none;
+                    Console.WriteLine("No weapon has been changed.");
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
                 }
                     
