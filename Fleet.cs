@@ -17,13 +17,13 @@ namespace RobotsVsDinosaurs
         
         public void PopulateFleet()
         {
-            Robot r1 = new Robot("R1", 150, 200, 5);
+            Robot r1 = new Robot("R1", 150, 200);
             roboArmy.Add(r1);
 
-            Robot r2 = new Robot("R2", 150, 200, 5);
+            Robot r2 = new Robot("R2", 150, 200);
             roboArmy.Add(r2);
 
-            Robot r3 = new Robot("R3", 150, 200, 5);
+            Robot r3 = new Robot("R3", 150, 200);
             roboArmy.Add(r3);
 
             Console.WriteLine("The robots have entered the battlefield.");

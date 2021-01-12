@@ -74,6 +74,7 @@ namespace RobotsVsDinosaurs
                 int dinoTarget = CombatSelector(dinoSelector);
                 Console.WriteLine("The robot " + roboArmy.roboArmy[roboAttacker].robotName + " has targeted " + dinoArmy.dinoArmy[dinoTarget].dinoType + ".");
                 roboArmy.roboArmy[roboAttacker].ChangeWeapon();
+                Console.WriteLine(roboArmy.roboArmy[roboAttacker].robotName + "'s power level is now " + roboArmy.roboArmy[roboAttacker].powerLevel + ", and health is now " + roboArmy.roboArmy[roboAttacker].roboHealth + ".");
                 roboArmy.roboArmy[roboAttacker].AttackDinosaur(dinoArmy.dinoArmy[dinoTarget]);
                 Console.WriteLine(roboArmy.roboArmy[roboAttacker].robotName + "'s power level is now " + roboArmy.roboArmy[roboAttacker].powerLevel + ".");
                 BattleFieldChecker();
@@ -89,8 +90,8 @@ namespace RobotsVsDinosaurs
                 int dinoAttacker = CombatSelector(dinoSelector);
                 int roboTarget = CombatSelector(robotSelector);
                 Console.WriteLine("The dinosaur " + dinoArmy.dinoArmy[dinoAttacker].dinoType + " has targeted " + roboArmy.roboArmy[roboTarget].robotName + ".");
-                dinoArmy.dinoArmy[dinoAttacker].AttackRobot(roboArmy.roboArmy[roboTarget]);
-                Console.WriteLine(dinoArmy.dinoArmy[dinoAttacker].dinoType + "'s energy points is now " + dinoArmy.dinoArmy[dinoAttacker].dinoEnergy + ".");
+                dinoArmy.dinoArmy[dinoAttacker].ChooseAttack(roboArmy.roboArmy[roboTarget]);
+                Console.WriteLine(dinoArmy.dinoArmy[dinoAttacker].dinoType + "'s energy points is now " + dinoArmy.dinoArmy[dinoAttacker].dinoEnergy + ", and health is " + dinoArmy.dinoArmy[dinoAttacker].dinoHealth + ".");
                 BattleFieldChecker();
 
             } while (dinoArmy.dinoArmy.Count > 0 && roboArmy.roboArmy.Count > 0);
