@@ -12,46 +12,71 @@ namespace RobotsVsDinosaurs
         public int roboHealth;
         public int powerLevel;
         public int roboAttackPower;
-        public List<Weapon> equippedWeapon;
+        public Weapon equippedWeapon;
 
         public Robot(string robotName, int roboHealth, int powerLevel, int roboAttackPower)
         {
             this.robotName = robotName;
             this.roboHealth = roboHealth;
             this.powerLevel = powerLevel;
-            this.roboAttackPower = roboAttackPower;
-            ChooseWeapon();
-            
+            equippedWeapon = new Weapon("Robofists", 5);
+            this.roboAttackPower = roboAttackPower * equippedWeapon.attackPower;
             
         }
 
-        public void ChooseWeapon()
+        
+        public void ChangeWeapon()
         {
-            Console.WriteLine("Choose your robot's starting weapon. 1. Lazer Rifle 2. Lazer Sword, 3. Robofists");
-            int selectedWeapon = int.Parse(Console.ReadLine());
-            if (selectedWeapon == 1)
+            Console.WriteLine("Changing equipped weapon uses 10 power level points. Would you like to change your robot's weapon?");
+            Console.WriteLine("Yes or No");
+            string changeWeaponResponse = Console.ReadLine();
+            if (changeWeaponResponse == "Yes" || changeWeaponResponse == "yes" || changeWeaponResponse == "y")
             {
-                Weapon lazerRifle = new Weapon("Lazer Rifle", 50);
-                Console.WriteLine("Lazer Rifle has been selected.");
+                powerLevel -= 10;
+                Console.WriteLine("Choose your robot's equipped weapon. 1. Lazer Rifle 2. Lazer Sword, 3. Robofists");
+                int selectedWeapon = int.Parse(Console.ReadLine());
+                if (selectedWeapon == 1)
+                {
+                    Weapon lazerRifle = new Weapon("Lazer Rifle", 15);
+                    Console.WriteLine("Lazer Rifle has been selected.");
+                    equippedWeapon = lazerRifle;
+                }
+                else if (selectedWeapon == 2)
+                {
+                    Weapon lazerSword = new Weapon("Lazer Sword", 10);
+                    Console.WriteLine("Lazer Sword has been selected.");
+                    equippedWeapon = lazerSword;
+                }
+                else if (selectedWeapon == 3)
+                {
+                    Weapon roboFists = new Weapon("Robofists", 5);
+                    Console.WriteLine("Robofists have been selected.");
+                    equippedWeapon = roboFists;
+                }
+                else
+                {
+                    Weapon none = new Weapon("No weapon selected", 1);
+                    Console.WriteLine("No weapon has been equipped.");
+                    equippedWeapon = none;
+                }
+                    
             }
-            else if (selectedWeapon == 2)
-            {
-                Weapon lazerSword = new Weapon("Lazer Sword", 60);
-                Console.WriteLine("Lazer Sword has been selected.");
-            }
-            else if (selectedWeapon == 3)
-            {
-                Weapon roboFists = new Weapon("Robofists", 20);
-                Console.WriteLine("Robofists have been selected.");
-            }
-            else
-            {
-                ChooseWeapon();
-            }
+            
+            
         }
         public void AttackDinosaur(Dinosaur chosenDino)
         {
-            chosenDino.dinoHealth -= roboAttackPower;
+            if (powerLevel > 0)
+            {
+                chosenDino.dinoHealth -= roboAttackPower;
+                powerLevel -= 10;
+                Console.WriteLine("The robot's attack was successful, " + chosenDino.dinoType + "'s health is now " + chosenDino.dinoHealth + ".");
+            }
+            else
+            {
+                Console.WriteLine("The robot's power level is too low too attack, and must recharge. The robot's power level will be restored.");
+                powerLevel = 100;
+            }
         } 
     }
 

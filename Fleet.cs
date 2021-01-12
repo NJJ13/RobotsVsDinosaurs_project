@@ -26,6 +26,8 @@ namespace RobotsVsDinosaurs
             Robot r3 = new Robot("R3", 150, 200, 5);
             roboArmy.Add(r3);
 
+            Console.WriteLine("The robots have entered the battlefield.");
+
         }
     }
 }

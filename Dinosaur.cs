@@ -23,7 +23,17 @@ namespace RobotsVsDinosaurs
 
         public void AttackRobot(Robot chosenRobot)
         {
-            chosenRobot.roboHealth -= dinoAttackPower;
+            if(dinoEnergy > 0)
+            {
+                chosenRobot.roboHealth -= dinoAttackPower;
+                dinoEnergy -= 10;
+                Console.WriteLine("The dinosaur's attack was successful, " + chosenRobot.robotName + "'s health is now " + chosenRobot.roboHealth + ".");
+            }
+            else
+            {
+                Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
+                dinoEnergy = 100;
+            }
             
         }
     }

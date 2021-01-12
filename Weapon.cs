@@ -8,8 +8,8 @@ namespace RobotsVsDinosaurs
 {
     class Weapon
     {
-        string weaponType;
-        int attackPower;
+        public string weaponType;
+        public int attackPower;
 
         public Weapon (string weaponType, int weaponAttackPower)
         {
