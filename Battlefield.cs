@@ -15,9 +15,9 @@ namespace RobotsVsDinosaurs
         public Battlefield()
         {
             dinoArmy = new Herd();
-            dinoArmy.PopulateHerd();
+            dinoArmy.Populate();
             roboArmy = new Fleet();
-            roboArmy.PopulateFleet();
+            roboArmy.Populate();
             selector = new Random();
 
         }
@@ -29,34 +29,34 @@ namespace RobotsVsDinosaurs
         
         public void BattleFieldChecker()
         {
-            if (dinoArmy.dinoArmy.Count >= 1 && dinoArmy.dinoArmy[0].dinoHealth <= 0)
+            if (dinoArmy.dinoArmy.Count >= 1 && dinoArmy.dinoArmy[0].health <= 0)
             {
-                Console.WriteLine(dinoArmy.dinoArmy[0].dinoType + " has been defeated.");
+                Console.WriteLine(dinoArmy.dinoArmy[0].name + " has been defeated.");
                 dinoArmy.dinoArmy.RemoveAt(0);
             }
-            else if (dinoArmy.dinoArmy.Count >= 2 && dinoArmy.dinoArmy[1].dinoHealth <= 0)
+            else if (dinoArmy.dinoArmy.Count >= 2 && dinoArmy.dinoArmy[1].health <= 0)
             {
-                Console.WriteLine(dinoArmy.dinoArmy[1].dinoType + " has been defeated.");
+                Console.WriteLine(dinoArmy.dinoArmy[1].name + " has been defeated.");
                 dinoArmy.dinoArmy.RemoveAt(1);
             }
-            else if (dinoArmy.dinoArmy.Count >= 3 && dinoArmy.dinoArmy[2].dinoHealth <= 0)
+            else if (dinoArmy.dinoArmy.Count >= 3 && dinoArmy.dinoArmy[2].health <= 0)
             {
-                Console.WriteLine(dinoArmy.dinoArmy[2].dinoType + " has been defeated.");
+                Console.WriteLine(dinoArmy.dinoArmy[2].name + " has been defeated.");
                 dinoArmy.dinoArmy.RemoveAt(2);
             }
-            else if (roboArmy.roboArmy.Count >= 1 && roboArmy.roboArmy[0].roboHealth <= 0)
+            else if (roboArmy.roboArmy.Count >= 1 && roboArmy.roboArmy[0].health <= 0)
             {
-                Console.WriteLine(roboArmy.roboArmy[0].robotName + " has been defeated.");
+                Console.WriteLine(roboArmy.roboArmy[0].name + " has been defeated.");
                 roboArmy.roboArmy.RemoveAt(0);
             }
-            else if (roboArmy.roboArmy.Count >= 2 && roboArmy.roboArmy[1].roboHealth <= 0)
+            else if (roboArmy.roboArmy.Count >= 2 && roboArmy.roboArmy[1].health <= 0)
             {
-                Console.WriteLine(roboArmy.roboArmy[1].robotName + " has been defeated.");
+                Console.WriteLine(roboArmy.roboArmy[1].name + " has been defeated.");
                 roboArmy.roboArmy.RemoveAt(1);
             }
-            else if (roboArmy.roboArmy.Count >= 3 && roboArmy.roboArmy[2].roboHealth <= 0)
+            else if (roboArmy.roboArmy.Count >= 3 && roboArmy.roboArmy[2].health <= 0)
             {
-                Console.WriteLine(roboArmy.roboArmy[2].robotName + " has been defeated.");
+                Console.WriteLine(roboArmy.roboArmy[2].name + " has been defeated.");
                 roboArmy.roboArmy.RemoveAt(2);
             }
         }
@@ -72,11 +72,11 @@ namespace RobotsVsDinosaurs
                 
                 int roboAttacker = CombatSelector(robotSelector);
                 int dinoTarget = CombatSelector(dinoSelector);
-                Console.WriteLine("The robot " + roboArmy.roboArmy[roboAttacker].robotName + " has targeted " + dinoArmy.dinoArmy[dinoTarget].dinoType + ".");
+                Console.WriteLine("The robot " + roboArmy.roboArmy[roboAttacker].name + " has targeted " + dinoArmy.dinoArmy[dinoTarget].name + ".");
                 roboArmy.roboArmy[roboAttacker].ChangeWeapon();
-                Console.WriteLine(roboArmy.roboArmy[roboAttacker].robotName + "'s power level is now " + roboArmy.roboArmy[roboAttacker].powerLevel + ", and health is now " + roboArmy.roboArmy[roboAttacker].roboHealth + ".");
-                roboArmy.roboArmy[roboAttacker].AttackDinosaur(dinoArmy.dinoArmy[dinoTarget]);
-                Console.WriteLine(roboArmy.roboArmy[roboAttacker].robotName + "'s power level is now " + roboArmy.roboArmy[roboAttacker].powerLevel + ".");
+                Console.WriteLine(roboArmy.roboArmy[roboAttacker].name + "'s power level is now " + roboArmy.roboArmy[roboAttacker].energy + ", and health is now " + roboArmy.roboArmy[roboAttacker].health + ".");
+                roboArmy.roboArmy[roboAttacker].Attack(dinoArmy.dinoArmy[dinoTarget]);
+                Console.WriteLine(roboArmy.roboArmy[roboAttacker].name + "'s power level is now " + roboArmy.roboArmy[roboAttacker].energy + ".");
                 BattleFieldChecker();
                 
                 robotSelector = roboArmy.roboArmy.Count;
@@ -89,9 +89,9 @@ namespace RobotsVsDinosaurs
                 
                 int dinoAttacker = CombatSelector(dinoSelector);
                 int roboTarget = CombatSelector(robotSelector);
-                Console.WriteLine("The dinosaur " + dinoArmy.dinoArmy[dinoAttacker].dinoType + " has targeted " + roboArmy.roboArmy[roboTarget].robotName + ".");
-                dinoArmy.dinoArmy[dinoAttacker].ChooseAttack(roboArmy.roboArmy[roboTarget]);
-                Console.WriteLine(dinoArmy.dinoArmy[dinoAttacker].dinoType + "'s energy points is now " + dinoArmy.dinoArmy[dinoAttacker].dinoEnergy + ", and health is " + dinoArmy.dinoArmy[dinoAttacker].dinoHealth + ".");
+                Console.WriteLine("The dinosaur " + dinoArmy.dinoArmy[dinoAttacker].name + " has targeted " + roboArmy.roboArmy[roboTarget].name + ".");
+                dinoArmy.dinoArmy[dinoAttacker].Attack(roboArmy.roboArmy[roboTarget]);
+                Console.WriteLine(dinoArmy.dinoArmy[dinoAttacker].name + "'s energy points is now " + dinoArmy.dinoArmy[dinoAttacker].energy + ", and health is " + dinoArmy.dinoArmy[dinoAttacker].health + ".");
                 BattleFieldChecker();
 
             } while (dinoArmy.dinoArmy.Count > 0 && roboArmy.roboArmy.Count > 0);

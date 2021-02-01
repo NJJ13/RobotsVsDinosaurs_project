@@ -6,78 +6,74 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Dinosaur
+    class Dinosaur : Combatant
     {
-        public string dinoType;
-        public int dinoHealth;
-        public int dinoEnergy;
-        public int dinoAttackPower;
         string[] attackArray = new string[3];
                 
 
         public Dinosaur(string dinoType, int dinoHealth, int dinoEnergy, int attackPower)
         {
-            this.dinoType = dinoType;
-            this.dinoHealth = dinoHealth;
-            this.dinoEnergy = dinoEnergy;
-            this.dinoAttackPower = attackPower;
+            this.name = dinoType;
+            this.health = dinoHealth;
+            this.energy = dinoEnergy;
+            this.attackPower = attackPower;
             attackArray[0] = "Base Attack = 1";
             attackArray[1] = "Bite = 2";
             attackArray[2] = "Charge = 3";
         }
 
-        public void HeadbuttRobot(Robot chosenRobot)
+        public void HeadbuttRobot(Combatant combatant)
         {
-            if(dinoEnergy > 0)
+            if(energy > 0)
             {
-                chosenRobot.roboHealth -= dinoAttackPower;
-                dinoEnergy -= 10;
-                Console.WriteLine("The dinosaur's attack was successful, " + chosenRobot.robotName + "'s health is now " + chosenRobot.roboHealth + ".");
+                combatant.health -= attackPower;
+                energy -= 10;
+                Console.WriteLine("The dinosaur's attack was successful, " + combatant.name + "'s health is now " + combatant.health + ".");
             }
             else
             {
                 Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
-                dinoEnergy = 50;
+                energy = 50;
             }
             
 
         }
-        public void BiteRobot(Robot chosenRobot)
+        public void BiteRobot(Combatant combatant)
         {
-            if (dinoEnergy > 0)
+            if (energy > 0)
             {
-                chosenRobot.roboHealth -= dinoAttackPower;
-                dinoHealth += dinoAttackPower;
-                dinoEnergy -= 50;
-                Console.WriteLine("The dinosaur's attack was successful, " + chosenRobot.robotName + "'s health is now " + chosenRobot.roboHealth + ".");
+                combatant.health -= attackPower;
+                health += attackPower;
+                energy -= 50;
+                Console.WriteLine("The dinosaur's attack was successful, " + combatant.name + "'s health is now " + combatant.health + ".");
                 Console.WriteLine("The dinosaur gained health from the successful bite.");
             }
             else
             {
                 Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
-                dinoEnergy = 50;
+                energy = 50;
             }
 
 
         }
-        public void ChargeRobot(Robot chosenRobot)
+        public void ChargeRobot(Combatant combatant)
         {
-            if (dinoEnergy > 0)
+            if (energy > 0)
             {
-                chosenRobot.roboHealth -= (2 * dinoAttackPower);
-                dinoEnergy = 0;
-                Console.WriteLine("The dinosaur's attack was successful, " + chosenRobot.robotName + "'s health is now " + chosenRobot.roboHealth + ".");
+                combatant.health -= (2 * attackPower);
+                energy = 0;
+                Console.WriteLine("The dinosaur's attack was successful, " + combatant.name + "'s health is now " + combatant.health + ".");
                 Console.WriteLine("The dinosaur's charge drained its energy completely");
             }
             else
             {
                 Console.WriteLine("This dinosaur's energy is too low too attack, and must rest. Energy has been restored.");
-                dinoEnergy = 50;
+                energy = 50;
             }
 
 
         }
-        public void ChooseAttack(Robot chosenRobot)
+        public void Attack(Combatant combatant)
         {
             Console.WriteLine("Choose your attack:");
             foreach (string attack in attackArray)
@@ -87,15 +83,15 @@ namespace RobotsVsDinosaurs
             int chosenAttack = int.Parse(Console.ReadLine());
             if (chosenAttack == 1)
             {
-                HeadbuttRobot(chosenRobot);
+                HeadbuttRobot(combatant);
             }
             else if (chosenAttack == 2)
             {
-                BiteRobot(chosenRobot);
+                BiteRobot(combatant);
             }
             else if (chosenAttack == 3)
             {
-                ChargeRobot(chosenRobot);
+                ChargeRobot(combatant);
             }
         }
 

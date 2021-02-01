@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Robot
+    class Robot : Combatant
     {
-        public string robotName;
-        public int roboHealth;
-        public int powerLevel;
-        public int attackPower = 5;
         public Weapon equippedWeapon;
         int roboAttackPower;
         public Weapon lazerRifle = new Weapon("Lazer Rifle", 15);
@@ -20,9 +16,10 @@ namespace RobotsVsDinosaurs
 
         public Robot(string robotName, int roboHealth, int powerLevel)
         {
-            this.robotName = robotName;
-            this.roboHealth = roboHealth;
-            this.powerLevel = powerLevel;
+            name = robotName;
+            health = roboHealth;
+            energy = powerLevel;
+            attackPower = 5;
             equippedWeapon = new Weapon("None", 1);
             this.roboAttackPower = equippedWeapon.attackPower * attackPower;
             List<Weapon> roboWeapons = new List<Weapon>();
@@ -40,7 +37,7 @@ namespace RobotsVsDinosaurs
             string changeWeaponResponse = Console.ReadLine();
             if (changeWeaponResponse == "Yes" || changeWeaponResponse == "yes" || changeWeaponResponse == "y")
             {
-                powerLevel -= 10;
+                energy -= 10;
                 Console.WriteLine("Choose your robot's equipped weapon. 1. Lazer Rifle (-10 power level points) 2. Lazer Sword (-5 power level points) 3. Robofists (-10 power level points)");
                 int selectedWeapon = int.Parse(Console.ReadLine());
                 if (selectedWeapon == 1)
@@ -49,7 +46,7 @@ namespace RobotsVsDinosaurs
                     Console.WriteLine("Lazer Rifle has been selected.");
                     equippedWeapon = lazerRifle;
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
-                    powerLevel -= 10;
+                    energy -= 10;
 
                 }
                 else if (selectedWeapon == 2)
@@ -57,15 +54,15 @@ namespace RobotsVsDinosaurs
                     Console.WriteLine("Lazer Sword has been selected.");
                     equippedWeapon = lazerSword;
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
-                    roboHealth += 25;
-                    powerLevel -= 5;
+                    health += 25;
+                    energy -= 5;
                 }
                 else if (selectedWeapon == 3)
                 {
                     Console.WriteLine("Robofists have been selected.");
                     equippedWeapon = robofists;
-                    roboHealth += 50;
-                    powerLevel -= 10;
+                    health += 50;
+                    energy -= 10;
                     this.roboAttackPower = attackPower * equippedWeapon.attackPower;
                 }
                 else
@@ -78,18 +75,18 @@ namespace RobotsVsDinosaurs
             
             
         }
-        public void AttackDinosaur(Dinosaur chosenDino)
+        public override void Attack(Combatant combatant)
         {
-            if (powerLevel > 0)
+            if (energy > 0)
             {
-                chosenDino.dinoHealth -= roboAttackPower;
-                powerLevel -= 10;
-                Console.WriteLine("The robot's attack was successful, " + chosenDino.dinoType + "'s health is now " + chosenDino.dinoHealth + ".");
+                combatant.health -= attackPower;
+                energy -= 10;
+                Console.WriteLine("The robot's attack was successful, " + combatant.name + "'s health is now " + combatant.name + ".");
             }
             else
             {
                 Console.WriteLine("The robot's power level is too low too attack, and must recharge. The robot's power level will be restored.");
-                powerLevel = 100;
+                energy = 100;
             }
         } 
     }

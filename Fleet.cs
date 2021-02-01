@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Fleet
+    class Fleet : Squad
     {
         public List<Robot> roboArmy;
 
@@ -15,7 +15,7 @@ namespace RobotsVsDinosaurs
             roboArmy = new List<Robot>();
         }
         
-        public void PopulateFleet()
+        public override void Populate()
         {
             Robot r1 = new Robot("R1", 150, 200);
             roboArmy.Add(r1);

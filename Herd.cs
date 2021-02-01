@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotsVsDinosaurs
 {
-    class Herd
+    class Herd : Squad
     {
         public List<Dinosaur> dinoArmy;
 
@@ -15,7 +15,7 @@ namespace RobotsVsDinosaurs
             dinoArmy = new List<Dinosaur>();
 
         }
-        public void PopulateHerd()
+        public override void Populate()
         {
             while (dinoArmy.Count < 3)
             {
